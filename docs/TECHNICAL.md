@@ -12,12 +12,14 @@ Talking Fellow is implemented as a serverless support workflow on AWS:
 - API Gateway for external chat integration
 - CloudWatch for logging and runtime metrics
 - Terraform for infrastructure provisioning
+- S3 + CloudFront for hosting the web client
 
 ## Repository Structure
 ```text
 talking-fellow/
 ├── infra/terraform/              # IaC: IAM, Lambda, Lex, API Gateway, DDB, S3, SNS, logs
 ├── lambda/fulfillment/app.py     # Fulfillment runtime logic
+├── web/index.html                # Hosted product frontend
 ├── lex/                          # Intent/slot config and alias settings
 ├── iam/                          # Least-privilege policy references
 ├── scripts/create_lex_alias.sh   # Alias + Lambda code-hook setup helper
@@ -65,3 +67,7 @@ For step-by-step operations, continue with:
 - `docs/deployment-guide.md`
 - `docs/testing-guide.md`
 - `docs/cleanup-guide.md`
+
+After deployment:
+- `terraform output website_url` gives the hosted frontend URL
+- `terraform output api_gateway_chat_url` gives the chat API URL

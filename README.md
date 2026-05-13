@@ -18,6 +18,7 @@ Customer support teams often struggle with language barriers, slow triage, and p
 - Sentiment-aware escalation to support teams
 - Conversation persistence and transcript archiving
 - API-ready backend for web and mobile chat channels
+- AWS-hosted website frontend for direct product access
 
 ## Typical User Flow
 1. Customer sends a support message.

@@ -6,6 +6,7 @@
 - `uv` for Python dependency/tool management
 - `jq` installed (for alias helper script)
 - Permissions to create IAM, Lambda, Lex, DynamoDB, S3, SNS, API Gateway, CloudWatch resources
+- Permissions to create CloudFront resources for website hosting
 
 ## 2. Install Python dependencies and run lint checks
 ```bash
@@ -36,6 +37,8 @@ Required outputs for alias setup:
 - `lex_bot_id`
 - `lex_bot_version`
 - `lambda_function_arn`
+- `website_url` (frontend)
+- `api_gateway_chat_url` (API for frontend)
 
 ## 6. Create Lex bot alias and attach Lambda hook
 From repository root:
@@ -49,6 +52,7 @@ chmod +x scripts/create_lex_alias.sh
 - DynamoDB: table `*-conversations` created with SSE enabled
 - S3: transcript bucket exists with public access blocked
 - API Gateway: `POST /chat` route available
+- CloudFront: website distribution deployed and serving `index.html`
 - Lex: bot version and alias available
 
 ## 8. Optional: SNS email confirmation
