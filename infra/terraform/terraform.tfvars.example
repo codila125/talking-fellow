@@ -1,0 +1,7 @@
+aws_region                    = "us-east-1"
+project_name                  = "multilingual-support-chatbot"
+environment                   = "dev"
+lex_bot_name                  = "CustomerSupportMultilingualBot"
+support_email                 = "support-team@example.com"
+cloudwatch_log_retention_days = 14
+transcript_ttl_days           = 30

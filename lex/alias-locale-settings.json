@@ -1,0 +1,29 @@
+{
+  "en_US": {
+    "enabled": true,
+    "codeHookSpecification": {
+      "lambdaCodeHook": {
+        "codeHookInterfaceVersion": "1.0",
+        "lambdaARN": "REPLACE_WITH_LAMBDA_ARN"
+      }
+    }
+  },
+  "es_ES": {
+    "enabled": true,
+    "codeHookSpecification": {
+      "lambdaCodeHook": {
+        "codeHookInterfaceVersion": "1.0",
+        "lambdaARN": "REPLACE_WITH_LAMBDA_ARN"
+      }
+    }
+  },
+  "fr_FR": {
+    "enabled": true,
+    "codeHookSpecification": {
+      "lambdaCodeHook": {
+        "codeHookInterfaceVersion": "1.0",
+        "lambdaARN": "REPLACE_WITH_LAMBDA_ARN"
+      }
+    }
+  }
+}

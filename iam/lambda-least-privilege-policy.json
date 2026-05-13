@@ -1,0 +1,49 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CloudWatchLogsWrite",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/*:*"
+    },
+    {
+      "Sid": "DynamoDbConversationWrite",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:Query"
+      ],
+      "Resource": "arn:aws:dynamodb:*:*:table/*-conversations"
+    },
+    {
+      "Sid": "TranslateAndComprehend",
+      "Effect": "Allow",
+      "Action": [
+        "translate:TranslateText",
+        "comprehend:DetectDominantLanguage",
+        "comprehend:DetectSentiment"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "EscalationNotification",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "arn:aws:sns:*:*:*-escalations"
+    },
+    {
+      "Sid": "TranscriptArchiveWrite",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::*/*"
+    }
+  ]
+}

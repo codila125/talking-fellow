@@ -1,0 +1,29 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+dist/
+
+# Environment files
+.env
+*.env
