@@ -23,6 +23,7 @@ __pycache__/
 # Build artifacts
 build/
 dist/
+.fulfillment.zip
 
 # Environment files
 .env

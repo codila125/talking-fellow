@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talking Fellow</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --ink: #162032;
+        --sub: #4f5d78;
+        --line: #d9e1ef;
+        --brand: #1363df;
+        --brand-ink: #ffffff;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at 20% 0%, #edf3ff 0%, #f7f9fd 40%, #f4f6fa 100%);
+        color: var(--ink);
+      }
+
+      .wrap {
+        max-width: 820px;
+        margin: 32px auto;
+        padding: 0 20px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(9, 24, 53, 0.06);
+      }
+
+      h1 {
+        margin: 0 0 6px;
+      }
+
+      p {
+        margin: 0 0 14px;
+        color: var(--sub);
+      }
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        margin: 12px 0 6px;
+      }
+
+      input, select, button {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+        box-sizing: border-box;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      button {
+        margin-top: 14px;
+        border: none;
+        background: var(--brand);
+        color: var(--brand-ink);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .status {
+        margin-top: 14px;
+        padding: 12px;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        background: #f8fbff;
+        white-space: pre-wrap;
+        min-height: 90px;
+      }
+
+      @media (max-width: 700px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Talking Fellow</h1>
+        <p>Multilingual customer support assistant with instant translated replies.</p>
+
+        <label for="apiBaseUrl">API Base URL</label>
+        <input id="apiBaseUrl" value="__API_BASE_URL__" />
+
+        <div class="row">
+          <div>
+            <label for="language">Preferred Language</label>
+            <select id="language">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+            </select>
+          </div>
+          <div>
+            <label for="userId">User ID</label>
+            <input id="userId" value="demo-user-001" />
+          </div>
+        </div>
+
+        <label for="message">Support Message</label>
+        <input id="message" value="I need help with my order status" />
+
+        <button id="sendBtn">Send Message</button>
+
+        <div class="status" id="statusBox">Status: idle</div>
+      </div>
+    </div>
+
+    <script>
+      const sendBtn = document.getElementById("sendBtn");
+      const statusBox = document.getElementById("statusBox");
+      const apiInput = document.getElementById("apiBaseUrl");
+
+      if (apiInput.value.includes("__API_BASE_URL__")) {
+        apiInput.value = "";
+      }
+
+      sendBtn.onclick = async () => {
+        const base = document.getElementById("apiBaseUrl").value.trim();
+        const preferredLanguage = document.getElementById("language").value;
+        const userId = document.getElementById("userId").value.trim() || "anonymous";
+        const message = document.getElementById("message").value.trim();
+
+        if (!base || !message) {
+          statusBox.textContent = "Please provide API Base URL and message.";
+          return;
+        }
+
+        statusBox.textContent = "Sending request...";
+
+        try {
+          const response = await fetch(`${base}/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user_id: userId,
+              preferred_language: preferredLanguage,
+              message,
+            }),
+          });
+
+          const payload = await response.json();
+          if (!response.ok) {
+            statusBox.textContent = `Request failed (${response.status}):\n${JSON.stringify(payload, null, 2)}`;
+            return;
+          }
+
+          statusBox.textContent = `Detected: ${payload.source_language}\nSentiment: ${payload.sentiment}\n\nBot:\n${payload.response}`;
+        } catch (err) {
+          statusBox.textContent = `Error: ${err.message}`;
+        }
+      };
+    </script>
+  </body>
+</html>

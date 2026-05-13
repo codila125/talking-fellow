@@ -37,3 +37,13 @@ output "lex_bot_version" {
   description = "Published Lex bot version"
   value       = aws_lexv2models_bot_version.v1.bot_version
 }
+
+output "website_bucket_name" {
+  description = "Private S3 bucket storing website assets"
+  value       = var.deploy_website ? aws_s3_bucket.website[0].bucket : null
+}
+
+output "website_url" {
+  description = "CloudFront URL for the hosted web frontend"
+  value       = var.deploy_website ? "https://${aws_cloudfront_distribution.website[0].domain_name}" : null
+}

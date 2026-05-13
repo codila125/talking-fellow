@@ -57,3 +57,9 @@ variable "transcript_ttl_days" {
   type        = number
   default     = 30
 }
+
+variable "deploy_website" {
+  description = "Whether to deploy the static website frontend."
+  type        = bool
+  default     = true
+}
