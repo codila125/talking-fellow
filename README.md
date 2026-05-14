@@ -45,3 +45,15 @@ For implementation details, use:
 ## Status
 - Repository: production-style portfolio project
 - Stack: AWS serverless architecture with infrastructure as code
+
+## Standard Developer Commands
+```bash
+make install
+make lint
+make format
+make infra-init
+make infra-plan
+make infra-apply
+make run
+make destroy
+```
